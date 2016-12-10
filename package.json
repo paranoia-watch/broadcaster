@@ -1,0 +1,19 @@
+{
+  "name": "Paranoia-Watch-Data-Broadcaster",
+  "version": "1.0.0",
+  "description": "Data Broadcaster",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Wouter Vroege",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.1.4",
+    "dotenv": "^1.2.0",
+    "moment": "^2.17.1",
+    "mongoose": "^4.6.1",
+    "socket.io": "^1.4.5"
+  }
+}
