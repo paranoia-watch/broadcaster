@@ -42,7 +42,16 @@ Store.on('location-averages-per-day-error', function(error) {
   console.error('location-averages-per-day-error', error);
 })
 
+Store.on('peilingwijzer-data', function(data) {
+  console.info('peilingwijzer-data', JSON.stringify(data));
+})
+
+Store.on('peilingwijzer-data-error', function(error) {
+  console.error('peilingwijzer-data-error', error);
+})
+
 Store.connect();
 //Store.getGrowthSinceLastHour();
-Store.getDeviationOfLastHour();
+//Store.getDeviationOfLastHour();
+Store.getPeilingwijzerData();
 //Store.getAveragesPerDay();
