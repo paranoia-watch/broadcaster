@@ -26,6 +26,14 @@ Store.on('last-hour-growth-error', function(error) {
   console.error('last-hour-growth-error', error);
 })
 
+Store.on('last-hour-deviation', function(data) {
+  console.info('last-hour-deviation', data);
+})
+
+Store.on('last-hour-deviation-error', function(error) {
+  console.error('last-hour-deviation-error', error);
+})
+
 Store.on('location-averages-per-day', function(data) {
   console.info('location-averages-per-day', JSON.stringify(data));
 })
@@ -36,4 +44,5 @@ Store.on('location-averages-per-day-error', function(error) {
 
 Store.connect();
 //Store.getGrowthSinceLastHour();
-Store.getAveragesPerDay();
+Store.getDeviationOfLastHour();
+//Store.getAveragesPerDay();
