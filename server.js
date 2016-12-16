@@ -50,8 +50,17 @@ Store.on('peilingwijzer-data-error', function(error) {
   console.error('peilingwijzer-data-error', error);
 })
 
+Store.on('top-influencers', function(data) {
+  console.info('top-influencers', JSON.stringify(data));
+})
+
+Store.on('top-influencers-error', function(error) {
+  console.error('top-influencers-error', error);
+})
+
 Store.connect();
 //Store.getGrowthSinceLastHour();
 //Store.getDeviationOfLastHour();
-Store.getPeilingwijzerData();
+Store.getTopInfluencersLastMonth();
+//Store.getPeilingwijzerData();
 //Store.getAveragesPerDay();
