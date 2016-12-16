@@ -61,6 +61,6 @@ Store.on('top-influencers-error', function(error) {
 Store.connect();
 //Store.getGrowthSinceLastHour();
 //Store.getDeviationOfLastHour();
-Store.getTopInfluencersLastMonth();
+Store.getAllTopInfluencers();
 //Store.getPeilingwijzerData();
 //Store.getAveragesPerDay();
