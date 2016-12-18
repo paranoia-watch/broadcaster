@@ -12,6 +12,7 @@ httpServer.listen(4000, function() {
 })
 
 var TOP_INFLUENCERS = {};
+var TOP_POLITICAL_INFLUENCERS = {};
 var LAST_HOUR_GROWTH = {};
 var LAST_HOUR_DEVIATION = {};
 var LOCATION_AVERAGES_PER_DAY = {};
@@ -19,6 +20,7 @@ var PEILINGWIJZER_DATA = {};
 
 io.sockets.on("connection", function (s) {
   io.emit('top-influencers', TOP_INFLUENCERS);
+  io.emit('top-political-influencers', TOP_POLITICAL_INFLUENCERS);
   io.emit('last-hour-growth', LAST_HOUR_GROWTH);
   io.emit('last-hour-deviation', LAST_HOUR_DEVIATION);
   io.emit('location-averages-per-day', LOCATION_AVERAGES_PER_DAY);
@@ -95,6 +97,16 @@ Store.on('top-influencers-error', function(error) {
   console.error('top-influencers-error', error);
 })
 
+Store.on('top-political-influencers', function(data) {
+  TOP_POLITICAL_INFLUENCERS = data;
+  io.sockets.emit('top-political-influencers', TOP_POLITICAL_INFLUENCERS);
+  console.info('top-political-influencers', JSON.stringify(TOP_POLITICAL_INFLUENCERS));
+})
+
+Store.on('top-political-influencers-error', function(error) {
+  console.error('top-political-influencers-error', error);
+})
+
 Store.connect();
 
 function runAll() {
@@ -131,6 +143,13 @@ function runAll() {
       console.time('getAllTopInfluencers');
       Store.getAllTopInfluencers(function() {
         console.timeEnd('getAllTopInfluencers');
+        itemCallback();
+      });
+    },
+    function(itemCallback) {
+      console.time('getTopPoliticalInfluencers');
+      Store.getTopPoliticalInfluencers(function() {
+        console.timeEnd('getTopPoliticalInfluencers');
         itemCallback();
       });
     }
