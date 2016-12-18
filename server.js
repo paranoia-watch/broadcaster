@@ -217,7 +217,7 @@ function setMostInfluencialTwitterUsers() {
       MOST_INFLUENCIAL_TWITTER_USERS[i] = locationInfluencer;
 
       var msg = 'The most influencial twitter user of the last 24 hours in ' + [i] + ' is @' + locationInfluencer;
-      //Tweeter.post(msg)
+      Tweeter.post(msg)
       console.info(msg);
 
     }
@@ -232,7 +232,7 @@ function setMostInfluencialPoliticians() {
       MOST_INFLUENCIAL_POLITICIANS[i] = locationInfluencer;
 
       var msg = 'The most influencial political twitter user of the last 24 hours in ' + [i] + ' is @' + locationInfluencer;
-      //Tweeter.post(msg)
+      Tweeter.post(msg)
       console.info(msg);
 
     }
