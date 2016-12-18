@@ -10,7 +10,10 @@ var async = require('async');
 var http = require('http')
 var socketio = require('socket.io')
 
-var httpServer = http.createServer()
+var httpServer = http.createServer(function(req, res) {
+    res.writeHead(200);
+    res.end('Welcome to the Paranoia Watch');
+})
 var io = socketio(httpServer)
 
 httpServer.listen(4000, function() {
@@ -23,6 +26,7 @@ var LAST_HOUR_GROWTH = {};
 var LAST_HOUR_DEVIATION = {};
 var LOCATION_AVERAGES_PER_DAY = {};
 var PEILINGWIJZER_DATA = {};
+var PEILINGWIJZER_GROWTH = {};
 
 var MOST_INFLUENCIAL_TWITTER_USERS = {Amsterdam: null, Berlin: null, Paris: null};
 var MOST_INFLUENCIAL_POLITICIANS = {Amsterdam: null, Berlin: null, Paris: null};
@@ -34,6 +38,7 @@ io.sockets.on("connection", function (s) {
   io.emit('last-hour-deviation', LAST_HOUR_DEVIATION);
   io.emit('location-averages-per-day', LOCATION_AVERAGES_PER_DAY);
   io.emit('peilingwijzer-data', PEILINGWIJZER_DATA);
+  io.emit('peilingwijzer-growth', PEILINGWIJZER_GROWTH);
 });
 
 var store = require('./lib/store');
@@ -96,6 +101,16 @@ Store.on('peilingwijzer-data-error', function(error) {
   console.error('peilingwijzer-data-error', error);
 })
 
+Store.on('peilingwijzer-growth', function(data) {
+  PEILINGWIJZER_GROWTH = data;
+  io.sockets.emit('peilingwijzer-growth', PEILINGWIJZER_GROWTH);
+  //console.info('peilingwijzer-growth', JSON.stringify(PEILINGWIJZER_GROWTH));
+})
+
+Store.on('peilingwijzer-growth-error', function(error) {
+  console.error('peilingwijzer-growth-error', error);
+})
+
 Store.on('top-influencers', function(data) {
   TOP_INFLUENCERS = data;
   io.sockets.emit('top-influencers', TOP_INFLUENCERS);
@@ -150,6 +165,13 @@ function runAll() {
     //     itemCallback();
     //   });
     // },
+    function(itemCallback) {
+      console.time('getPeilingwijzerGrowth');
+      Store.getPeilingwijzerGrowth(function() {
+        console.timeEnd('getPeilingwijzerGrowth');
+        itemCallback();
+      })
+    },
     function(itemCallback) {
       console.time('getAllTopInfluencers');
       Store.getAllTopInfluencers(function() {
