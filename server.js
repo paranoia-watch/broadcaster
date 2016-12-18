@@ -122,27 +122,27 @@ Store.connect();
 
 function runAll() {
   async.series([
-    // function(itemCallback) {
-    //   console.time('getGrowthSinceLastHour');
-    //   Store.getGrowthSinceLastHour(function() {
-    //     console.timeEnd('getGrowthSinceLastHour');
-    //     itemCallback();
-    //   });
-    // },
-    // function(itemCallback) {
-    //   console.time('getDeviationOfLastHour');
-    //   Store.getDeviationOfLastHour(function() {
-    //     console.time('getDeviationOfLastHour');        
-    //     itemCallback();
-    //   });
-    // },
-    // function(itemCallback) {
-    //   console.time('getAveragesPerDay');
-    //   Store.getAveragesPerDay(function() {
-    //     console.timeEnd('getAveragesPerDay');
-    //     itemCallback();
-    //   });
-    // },
+    function(itemCallback) {
+      console.time('getGrowthSinceLastHour');
+      Store.getGrowthSinceLastHour(function() {
+        console.timeEnd('getGrowthSinceLastHour');
+        itemCallback();
+      });
+    },
+    function(itemCallback) {
+      console.time('getDeviationOfLastHour');
+      Store.getDeviationOfLastHour(function() {
+        console.time('getDeviationOfLastHour');        
+        itemCallback();
+      });
+    },
+    function(itemCallback) {
+      console.time('getAveragesPerDay');
+      Store.getAveragesPerDay(function() {
+        console.timeEnd('getAveragesPerDay');
+        itemCallback();
+      });
+    },
     // function(itemCallback) {
     //   console.time('getPeilingwijzerData');
     //   Store.getPeilingwijzerData(function() {
@@ -150,13 +150,13 @@ function runAll() {
     //     itemCallback();
     //   });
     // },
-    // function(itemCallback) {
-    //   console.time('getAllTopInfluencers');
-    //   Store.getAllTopInfluencers(function() {
-    //     console.timeEnd('getAllTopInfluencers');
-    //     itemCallback();
-    //   });
-    // },
+    function(itemCallback) {
+      console.time('getAllTopInfluencers');
+      Store.getAllTopInfluencers(function() {
+        console.timeEnd('getAllTopInfluencers');
+        itemCallback();
+      });
+    },
     function(itemCallback) {
       console.time('getTopPoliticalInfluencers');
       Store.getTopPoliticalInfluencers(function() {
